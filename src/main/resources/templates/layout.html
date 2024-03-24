@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>Spring-Boot Básico</title>
     <meta charset="UTF-8" />
@@ -18,11 +19,11 @@
     <link href="/css/style.css" rel="stylesheet" />
 </head>
 <body>
-    <header th:replace="~{fragments/header :: cabecalho}">
-        <div>Header</div>
-    </header>
+<header th:replace="~{fragments/header :: cabecalho}">
+    <div>header</div>
+</header>
 
-<div class="layout-main">
+<div  class="layout-main">
     <aside>
         <nav th:replace="~{fragments/sidebar :: nav-sidebar}">
             <span>menu</span>
@@ -30,33 +31,43 @@
     </aside>
 
     <section layout:fragment="corpo">
-        <div>conteudo principal das paginas</div>
+        <div>conteudo principal das páginas</div>
     </section>
 </div>
 
 <footer th:replace="~{fragments/footer :: rodape}">
-    <div>Footer</div>
+    <div>footer</div>
 </footer>
 
-    <!-- Bootstrap core JavaScript
-        ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
-    <script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
 
-        $(function() {
-            $('[data-toggle="popover"]').popover();
-        });
+    var url = '';
 
-        $(document).ready(function(){
-            $(".navbar-toggle").click(function(){
-                $(".sidebar").toggleClass("sidebar-open");
-            })
-        });
+    $('button[id*="btn_"]').click(function() {
+        url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
+    });
 
-    </script>
+    $('#ok_confirm').click(function() {
+        document.location.href = url;
+    });
+
+    $(function() {
+        $('[data-toggle="popover"]').popover();
+    });
+
+    $(document).ready(function(){
+        $(".navbar-toggle").click(function(){
+            $(".sidebar").toggleClass("sidebar-open");
+        })
+    });
+
+</script>
 </body>
 </html>

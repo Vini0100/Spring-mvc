@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service @Transactional(readOnly = false)
@@ -36,5 +37,20 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Override @Transactional(readOnly = true)
     public List<Funcionario> buscarTodos() {
         return dao.findAll();
+    }
+
+    @Override
+    public Object buscarPorNome(String nome) {
+        return null;
+    }
+
+    @Override
+    public Object buscarPorCargo(Long id) {
+        return null;
+    }
+
+    @Override
+    public Object buscarPorDatas(LocalDate entrada, LocalDate saida) {
+        return null;
     }
 }

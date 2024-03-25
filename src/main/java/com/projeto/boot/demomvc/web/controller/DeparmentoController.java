@@ -51,7 +51,7 @@ public class DeparmentoController {
     @GetMapping("/excluir/{id}")
     public String excluir(@PathVariable("id") Long id, ModelMap model) {
 
-        if (service.depertamentoTemCargos(id)) {
+        if (service.departamentoTemCargos(id)) {
             model.addAttribute("fail", "Departamento não removido. Possui cargo(s) vinculado(s).");
         } else {
             service.excluir(id);

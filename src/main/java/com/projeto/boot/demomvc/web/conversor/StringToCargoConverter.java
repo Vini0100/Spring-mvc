@@ -1,17 +1,18 @@
 package com.projeto.boot.demomvc.web.conversor;
-import com.projeto.boot.demomvc.domain.Departamento;
-import com.projeto.boot.demomvc.service.DepartamentoService;
+import com.projeto.boot.demomvc.domain.Cargo;
+import com.projeto.boot.demomvc.service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
+import org.springframework.core.convert.converter.Converter;
 
 @Component
-public class StringToDepartamentoConverter implements Converter<String, Departamento> {
+public class StringToCargoConverter implements Converter<String, Cargo> {
 
     @Autowired
-    private DepartamentoService service;
+    private CargoService service;
+
     @Override
-    public Departamento convert(String text) {
+    public Cargo convert(String text) {
         if (text.isEmpty()) {
             return null;
         }

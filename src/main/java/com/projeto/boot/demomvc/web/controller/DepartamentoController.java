@@ -2,9 +2,11 @@ package com.projeto.boot.demomvc.web.controller;
 
 import com.projeto.boot.demomvc.domain.Departamento;
 import com.projeto.boot.demomvc.service.DepartamentoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,15 +15,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/departamentos")
-public class DeparmentoController {
+public class DepartamentoController {
 
     @Autowired
     private DepartamentoService service;
 
     @GetMapping("/cadastrar")
     public String cadastrar(Departamento departamento) {
-     return "/departamento/cadastro";
+        return "/departamento/cadastro";
     }
+
     @GetMapping("/listar")
     public String listar(ModelMap model) {
         model.addAttribute("departamentos", service.buscarTodos());
@@ -29,22 +32,32 @@ public class DeparmentoController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(Departamento departamento, RedirectAttributes attr){
+    public String salvar(@Valid Departamento departamento, BindingResult result, RedirectAttributes attr) {
+
+        if (result.hasErrors()) {
+            return "/departamento/cadastro";
+        }
+
         service.salvar(departamento);
-        attr.addFlashAttribute("success", "Departamento inderido com sucesso");
+        attr.addFlashAttribute("success", "Departamento inserido com sucesso.");
         return "redirect:/departamentos/cadastrar";
     }
 
     @GetMapping("/editar/{id}")
     public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("departamento", service.buscarPorId(id)); //Metodo que busca o Id que irei editar
+        model.addAttribute("departamento", service.buscarPorId(id));
         return "/departamento/cadastro";
     }
 
     @PostMapping("/editar")
-    public String editar(Departamento departamento, RedirectAttributes attr){
+    public String editar(@Valid Departamento departamento, BindingResult result, RedirectAttributes attr) {
+
+        if (result.hasErrors()) {
+            return "/departamento/cadastro";
+        }
+
         service.editar(departamento);
-        attr.addFlashAttribute("success", "Departamento editado com sucesso");
+        attr.addFlashAttribute("success", "Departamento editado com sucesso.");
         return "redirect:/departamentos/cadastrar";
     }
 
@@ -60,4 +73,6 @@ public class DeparmentoController {
 
         return listar(model);
     }
+
+
 }

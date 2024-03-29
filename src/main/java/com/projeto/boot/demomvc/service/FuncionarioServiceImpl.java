@@ -40,17 +40,17 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     }
 
     @Override
-    public Object buscarPorNome(String nome) {
+    public List<Funcionario> buscarPorNome(String nome) {
+        return dao.findByNome(nome);
+    }
+
+    @Override
+    public List<Funcionario> buscarPorCargo(Long id) {
         return null;
     }
 
     @Override
-    public Object buscarPorCargo(Long id) {
-        return null;
-    }
-
-    @Override
-    public Object buscarPorDatas(LocalDate entrada, LocalDate saida) {
+    public List<Funcionario> buscarPorDatas(LocalDate entrada, LocalDate saida) {
         return null;
     }
 }
